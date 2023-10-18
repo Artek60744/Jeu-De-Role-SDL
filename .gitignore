@@ -1,1 +1,7 @@
 *.dll
+*.o
+*.exe
+main
+
+src
+images

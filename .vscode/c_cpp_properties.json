@@ -2,16 +2,16 @@
     "configurations": [
         {
             "name": "Win32",
+            "compilerPathInCppPropertiesJson": "C:\\msys64\\mingw64\\bin\\gcc.exe",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/src/include"
+                "${workspaceFolder}/src"
             ],
             "defines": [
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE"
-            ],
-            "intelliSenseMode": "windows-msvc-x64"
+            ]
         }
     ],
     "version": 4
