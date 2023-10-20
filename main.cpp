@@ -1,49 +1,46 @@
-/*
-    gcc main.cpp `sdl2-config --cflags --libs` -lstdc++
-    ou
-    gcc main.cpp -o main -lSDL2 -lstdc++
-    export DISPLAY=:0
-
-    ./main
-*/
-
-#include <SDL2/SDL.h>
-#include <ostream>
-#include <iostream>
+// gcc main2.cpp -o main -lsfml-graphics -lsfml-window -lsfml-system -lstdc++
+// export DISPLAY=:0
+// ./main
+#include "header.h"
 
 int main(int argc, char* argv[]) {
-    // Initialisation de SDL
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        // Gestion de l'erreur en cas d'échec
-        std::cerr << "Erreur lors de l'initialisation de SDL : " << SDL_GetError() << std::endl;
-        return 1;
+    // Créer une fenêtre SFML
+    sf::RenderWindow window(sf::VideoMode(HAUTEUR, LARGEUR), "Afficher une image");
+
+    // Charger une texture (une image)
+    sf::Texture texture;
+    if (!texture.loadFromFile("data/images/personnages/ichigo1.png")) {
+        // Gestion des erreurs si le chargement de l'image échoue
+        return -1;
     }
 
-    // Création de la fenêtre
-    SDL_Window* window = SDL_CreateWindow("Exemple SDL", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_SHOWN);
+    // Créer un sprite à partir de la texture chargée
+    sf::Sprite sprite(texture);
 
-    if (window == nullptr) {
-        // Gestion de l'erreur en cas d'échec
-        std::cerr << "Erreur lors de la création de la fenêtre : " << SDL_GetError() << std::endl;
-        SDL_Quit();
-        return 1;
-    }
-
-    // Boucle principale
-    bool quit = false;
-    SDL_Event e;
-    while (!quit) {
-        // Gestion des événements
-        while (SDL_PollEvent(&e) != 0) {
-            if (e.type == SDL_QUIT) {
-                quit = true;
+    int menu = 1;
+    // Boucle principale du programme
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (menu)
+                //affiche_menu();
+            
+            if (event.type == sf::Event::Closed) {
+                window.close();
             }
-        }
-    }
 
-    // Nettoyage et sortie
-    SDL_DestroyWindow(window);
-    SDL_Quit();
+        }
+
+        // Effacer l'écran
+        window.clear();
+
+        // Dessiner le sprite
+        window.draw(sprite);
+
+        // Rafraîchir l'écran
+        window.display();
+    }
 
     return 0;
 }
+

@@ -1,7 +1,5 @@
+.vscode
 *.dll
 *.o
 *.exe
 main
-
-src
-images
